@@ -7,6 +7,7 @@ cd typo3/
 git init > /dev/null
 
 cd typo3conf
+rm -rf autoload
 rm -f LocalConfiguration.php
 touch LocalConfiguration.php
 db=datenbankname
@@ -14,7 +15,6 @@ du=datenbankuser
 dh=Hostname
 dp=datenbankpasswort
 installPasswort='$P$CAMstFeZNWquvENdiz4fxuKMY21hVL0'
-touch LocalConfiguration.php
 read -p 'Datenbankname: ' db
 read -p 'Datenbankuser: ' du
 read -p 'Hostname: ' dh
