@@ -255,6 +255,9 @@ return [
         'sitepackage' => [
             'packagePath' => 'typo3conf/ext/sitepackage/',
         ],
+        'vhs' => [
+            'packagePath' => 'typo3conf/ext/vhs/',
+        ],
     ],
     'version' => 5,
 ];
@@ -296,6 +299,12 @@ mkdir rte_ckeditor_image
 cd rte_ckeditor_image
 git init > /dev/null
 git pull https://github.com/netresearch/t3x-rte_ckeditor_image > /dev/null 2>&1
+
+cd ../
+mkdir vhs
+cd vhs
+git init > /dev/null
+git pull https://github.com/FluidTYPO3/vhs > /dev/null 2>&1
 
 echo " "
 echo "Done. Feel free to trink a Beer :-)"
