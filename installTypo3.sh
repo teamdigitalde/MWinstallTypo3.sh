@@ -50,6 +50,7 @@ return [
             'rsaauth' => 'a:1:{s:18:"temporaryDirectory";s:0:"";}',
             'saltedpasswords' => 'a:2:{s:3:"BE.";a:4:{s:21:"saltedPWHashingMethod";s:41:"TYPO3\\CMS\\Saltedpasswords\\Salt\\Pbkdf2Salt";s:11:"forceSalted";i:0;s:15:"onlyAuthService";i:0;s:12:"updatePasswd";i:1;}s:3:"FE.";a:5:{s:7:"enabled";i:1;s:21:"saltedPWHashingMethod";s:41:"TYPO3\\CMS\\Saltedpasswords\\Salt\\Pbkdf2Salt";s:11:"forceSalted";i:0;s:15:"onlyAuthService";i:0;s:12:"updatePasswd";i:1;}}',
             'sitepackage' => 'a:0:{}',
+            'bootstrapslider' => 'a:0:{}',
         ],
     ],
     'EXTCONF' => [
@@ -164,6 +165,9 @@ return [
         'rte_ckeditor_image' => [
             'packagePath' => 'typo3conf/ext/rte_ckeditor_image/',
         ],
+        'bootstrapslider' => [
+            'packagePath' => 'typo3conf/ext/bootstrapslider/',
+        ],
         'rsaauth' => [
             'packagePath' => 'typo3/sysext/rsaauth/',
         ],
@@ -273,10 +277,16 @@ cd ext
 mkdir sitepackage
 cd sitepackage
 git init > /dev/null
-git pull https://github.com/teamdigitalde/TYPO3_EXT_Skeleton > /dev/null 2>&1
+git pull https://github.com/teamdigitalde/sitepackage > /dev/null 2>&1
 
 mysql -u $du -p$dp --default_character_set utf8 -h $dh $db < kickstart.sql
 rm -rf kickstart.sql
+
+cd ../
+mkdir bootstrapslider
+cd bootstrapslider
+git init > /dev/null
+git pull https://github.com/teamdigitalde/bootstrapslider > /dev/null 2>&1
 
 cd ../
 mkdir gridelements
