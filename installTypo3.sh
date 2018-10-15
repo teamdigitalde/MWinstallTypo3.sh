@@ -3,6 +3,8 @@
 #change to typo3 directory
 cd typo3/
 
+rm -rf .htaccess
+
 #create a git repository
 git init > /dev/null
 
@@ -60,9 +62,13 @@ return [
         ],
     ],
     'FE' => [
-        'debug' => false,
+        'debug' => true,
         'loginSecurityLevel' => 'rsa',
         'pageNotFound_handling' => 'USER_FUNCTION:typo3conf/ext/sitepackage/Resources/Private/Php/pageNotFound.php:user_pageNotFound->pageNotFound',
+        'passwordHashing' => [
+            'className' => 'TYPO3\\CMS\\Core\\Crypto\\PasswordHashing\\BcryptPasswordHash',
+            'options' => [],
+        ],
     ],
     'GFX' => [
         'jpg_quality' => '80',
@@ -164,9 +170,6 @@ return [
         'rte_ckeditor_image' => [
             'packagePath' => 'typo3conf/ext/rte_ckeditor_image/',
         ],
-        'bootstrapslider' => [
-            'packagePath' => 'typo3conf/ext/bootstrapslider/',
-        ],
         'rsaauth' => [
             'packagePath' => 'typo3/sysext/rsaauth/',
         ],
@@ -203,6 +206,9 @@ return [
         'documentation' => [
             'packagePath' => 'typo3/sysext/documentation/',
         ],
+        'bootstrapslider' => [
+            'packagePath' => 'typo3conf/ext/bootstrapslider/',
+        ],
         'felogin' => [
             'packagePath' => 'typo3/sysext/felogin/',
         ],
@@ -230,6 +236,9 @@ return [
         'reports' => [
             'packagePath' => 'typo3/sysext/reports/',
         ],
+        'rte_ckeditor_image' => [
+            'packagePath' => 'typo3conf/ext/rte_ckeditor_image/',
+        ],
         'scheduler' => [
             'packagePath' => 'typo3/sysext/scheduler/',
         ],
@@ -251,14 +260,11 @@ return [
         'gridelements' => [
             'packagePath' => 'typo3conf/ext/gridelements/',
         ],
-        'realurl' => [
-            'packagePath' => 'typo3conf/ext/realurl/',
+        'dce' => [
+            'packagePath' => 'typo3conf/ext/dce/',
         ],
         'sitepackage' => [
             'packagePath' => 'typo3conf/ext/sitepackage/',
-        ],
-        'vhs' => [
-            'packagePath' => 'typo3conf/ext/vhs/',
         ],
     ],
     'version' => 5,
@@ -274,6 +280,21 @@ mkdir sitepackage
 cd sitepackage
 git init > /dev/null
 git pull https://github.com/teamdigitalde/sitepackage > /dev/null 2>&1
+
+#copy .htaccess
+#cp typo3_src/_.htaccess typo3/.htaccess
+
+#basic access-restriction (beta/seite;)
+printf "
+# basic access-restriction (beta/seite;)
+AuthName 'Geschützter Bereich'
+AuthType Basic
+AuthUserFile ${workingdirectory}/.htpasswd
+require valid-user" >> .htaccess
+
+mv .htaccess ../../..
+mv index.php ../../..
+mv autoload ../..
 
 mysql -u $du -p$dp --default_character_set utf8 -h $dh $db < kickstart.sql
 rm -rf kickstart.sql
@@ -291,12 +312,6 @@ git init > /dev/null
 git pull https://github.com/TYPO3-extensions/gridelements > /dev/null 2>&1
 
 cd ../
-mkdir realurl
-cd realurl
-git init > /dev/null
-git pull https://github.com/dmitryd/typo3-realurl > /dev/null 2>&1
-
-cd ../
 mkdir dce
 cd dce
 git init > /dev/null
@@ -308,11 +323,6 @@ cd rte_ckeditor_image
 git init > /dev/null
 git pull https://github.com/netresearch/t3x-rte_ckeditor_image > /dev/null 2>&1
 
-cd ../
-mkdir vhs
-cd vhs
-git init > /dev/null
-git pull https://github.com/FluidTYPO3/vhs > /dev/null 2>&1
 
 echo " "
 echo "Done. Feel free to trink a Beer :-)"
