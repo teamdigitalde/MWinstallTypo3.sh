@@ -4,6 +4,7 @@
 cd typo3/
 
 rm -rf .htaccess
+rm -rf index.php
 
 #create a git repository
 git init > /dev/null
@@ -257,8 +258,11 @@ return [
         'viewpage' => [
             'packagePath' => 'typo3/sysext/viewpage/',
         ],
-        'gridelements' => [
-            'packagePath' => 'typo3conf/ext/gridelements/',
+        'redirects' => [
+            'packagePath' => 'typo3/sysext/redirects/',
+        ],
+        'flux' => [
+            'packagePath' => 'typo3conf/ext/flux/',
         ],
         'dce' => [
             'packagePath' => 'typo3conf/ext/dce/',
@@ -269,7 +273,6 @@ return [
     ],
     'version' => 5,
 ];
-
 " >> PackageStates.php
 
 touch ENABLE_INSTALL_TOOL
@@ -306,10 +309,10 @@ git init > /dev/null
 git pull https://github.com/teamdigitalde/bootstrapslider > /dev/null 2>&1
 
 cd ../
-mkdir gridelements
-cd gridelements
+mkdir flux
+cd flux
 git init > /dev/null
-git pull https://github.com/TYPO3-extensions/gridelements > /dev/null 2>&1
+git pull https://github.com/FluidTYPO3/flux > /dev/null 2>&1
 
 cd ../
 mkdir dce
