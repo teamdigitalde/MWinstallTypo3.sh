@@ -1,5 +1,11 @@
 ﻿#!/etc/bash
 
+workingdirectory=${PWD}
+
+#htpasswd
+touch .htpasswd
+printf 'beta:$1$$.OPcLRctp0tpQ81Db9tKP/' >> .htpasswd
+
 #change to typo3 directory
 cd typo3/
 
