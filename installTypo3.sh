@@ -113,8 +113,8 @@ return [
         'processor_colorspace' => 'RGB',
         'processor_effects' => false,
         'processor_enabled' => true,
-        'processor_path' => '/usr/bin/',
-        'processor_path_lzw' => '/usr/bin/',
+        'processor_path' => '/usr/local/bin/',
+        'processor_path_lzw' => '/usr/local/bin/',
     ],
     'MAIL' => [
         'transport' => 'sendmail',
