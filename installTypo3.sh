@@ -34,7 +34,7 @@ return [
     'BE' => [
         'debug' => '',
         'explicitADmode' => 'explicitAllow',
-        'installToolPassword' => '$P$CAMstFeZNWquvENdiz4fxuKMY21hVL0',
+        'installToolPassword' => '"$installPasswort"',
         'loginSecurityLevel' => 'rsa',
         'passwordHashing' => [
             'className' => 'TYPO3\\CMS\\Core\\Crypto\\PasswordHashing\\BcryptPasswordHash',
